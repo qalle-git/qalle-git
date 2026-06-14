@@ -1,0 +1,37 @@
+name: Metrics
+on:
+  # Regenerate daily at midnight UTC
+  schedule: [{ cron: "0 0 * * *" }]
+  # Allow manual runs from the Actions tab
+  workflow_dispatch:
+  # Refresh on every push to the default branch
+  push: { branches: ["main"] }
+
+jobs:
+  github-metrics:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          # A classic Personal Access Token stored as a repo secret. See SETUP.md
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: qalle-git
+          filename: github-metrics.svg
+          config_timezone: Europe/Stockholm
+
+          # Recent activity feed
+          plugin_activity: yes
+          plugin_activity_limit: 5
+          plugin_activity_days: 0
+          plugin_activity_filter: issue, pr, release, fork, review, ref/create
+
+          # Language / code breakdown tuned to the languages I use most
+          plugin_code: yes
+          plugin_code_languages: lua, csharp, typescript, python
+          plugin_code_load: 400
+
+          plugin_languages: yes
+          plugin_languages_limit: 8
+          plugin_languages_sections: most-used
