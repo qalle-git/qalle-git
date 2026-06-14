@@ -21,17 +21,7 @@ jobs:
           filename: github-metrics.svg
           config_timezone: Europe/Stockholm
 
-          # Recent activity feed
-          plugin_activity: yes
-          plugin_activity_limit: 5
-          plugin_activity_days: 0
-          plugin_activity_filter: issue, pr, release, fork, review, ref/create
-
-          # Language / code breakdown tuned to the languages I use most
-          plugin_code: yes
-          plugin_code_languages: lua, csharp, typescript, python
-          plugin_code_load: 400
-
+          # Language breakdown tuned to the languages I use most
           plugin_languages: yes
           plugin_languages_limit: 8
           plugin_languages_sections: most-used
